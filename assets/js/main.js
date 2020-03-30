@@ -13,13 +13,12 @@ var userMail;
 var matchedAccount = false;
 var btnEnter;
 var btnCancel;
-var error = document.getElementById('error');
-var welcome = document.getElementById('welcome');
 var messageBox = document.getElementById('message-box');
 
 // Var gioco dadi
 var numberPlayer;
 var numberNpc;
+var btnPlay;
 
 // Bottoni invio e annulla
 btnEnter = document.getElementById('btnEnter');
@@ -58,7 +57,7 @@ btnEnter.addEventListener( 'click',
 btnCancel.addEventListener( 'click',
     function() {
         document.getElementById('email').value ='';
-        
+
         //reset condizioni
         matchedAccount = false;
         messageBox.className = 'hidden';
@@ -67,18 +66,31 @@ btnCancel.addEventListener( 'click',
 
 // 4. Generare due numeri casuali da 1 a 6
 
-numberPlayer = Math.floor((Math.random() * 6) + 1);
-numberNpc = Math.floor((Math.random() * 6) + 1);
+btnPlay = document.getElementById('btnPlay');
 
-console.log(numberPlayer, numberNpc);
+btnPlay.addEventListener( 'click',
+    function() {
+        dice.className = dice.classList + ' visible';
+        numberPlayer = Math.floor((Math.random() * 6) + 1);
+        numberNpc = Math.floor((Math.random() * 6) + 1);
 
-if (numberPlayer > numberNpc) {
-    console.log('Hai vinto!');
-}   else if (numberPlayer < numberNpc) {
-    console.log('Hai perso');
-}   else {
-    console.log('Avete pareggiato');
-    
-}
+
+        //Visualizzare numero
+        document.getElementById('number-player').innerHTML = numberPlayer;
+        document.getElementById('number-npc').innerHTML = numberNpc;
+        console.log(numberPlayer, numberNpc);
+
+        // 5. Stabilire vincitore (n più alto)
+        if (numberPlayer > numberNpc) {
+            document.getElementById('game-message').innerHTML = 'Hai vinto!';
+        }   else if (numberPlayer < numberNpc) {
+            document.getElementById('game-message').innerHTML = 'Hai perso!';
+        }   else {
+            document.getElementById('game-message').innerHTML = 'Avete pareggiato!';
+            
+        }
+    }
+);
+
 
 
